@@ -105,11 +105,11 @@ namespace WpfClient
                     while (stream.DataAvailable);
 
                     string message = builder.ToString();
-                    Console.WriteLine(message);//вывод сообщения
+                    //Console.WriteLine(message);//вывод сообщения
                 }
                 catch
                 {
-                    Console.WriteLine("Подключение прервано!"); //соединение было прервано
+                    //Console.WriteLine("Подключение прервано!"); //соединение было прервано
                     //Console.ReadLine();
                     Disconnect();
                 }
@@ -118,10 +118,18 @@ namespace WpfClient
 
         void Disconnect()
         {
-            if (stream != null)
-                stream.Close();//отключение потока
-            if (client != null)
-                client.Close();//отключение клиента
+            try
+            {
+                if (stream != null)
+                    stream.Close();//отключение потока
+                if (client != null)
+                    client.Close();//отключение клиента
+            }
+            catch
+            {
+                this.Close();
+            }
+            
             //Environment.Exit(0); //завершение процесса
         }
 
