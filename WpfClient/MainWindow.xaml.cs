@@ -26,8 +26,8 @@ namespace WpfClient
         //private const string host = "127.0.0.1";
         private const string host = "91.238.103.51";
         private const int port = 8888;
-        static TcpClient client;
-        static NetworkStream stream;
+        TcpClient client;
+        NetworkStream stream;
 
         public MainWindow()
         {
@@ -74,9 +74,17 @@ namespace WpfClient
 
             //while (true)
             //{
+            try
+            {
                 //string message = Console.ReadLine();
                 byte[] data = Encoding.Unicode.GetBytes(message);
                 stream.Write(data, 0, data.Length);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                Disconnect();
+            }
             //}
         }
         // получение сообщений
@@ -102,7 +110,7 @@ namespace WpfClient
                 catch
                 {
                     Console.WriteLine("Подключение прервано!"); //соединение было прервано
-                    Console.ReadLine();
+                    //Console.ReadLine();
                     Disconnect();
                 }
             }
@@ -114,12 +122,17 @@ namespace WpfClient
                 stream.Close();//отключение потока
             if (client != null)
                 client.Close();//отключение клиента
-            Environment.Exit(0); //завершение процесса
+            //Environment.Exit(0); //завершение процесса
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Disconnect();
+        }
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            //Disconnect();
         }
     }
 }

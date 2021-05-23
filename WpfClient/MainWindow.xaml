@@ -7,12 +7,13 @@
         mc:Ignorable="d"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Height="600" Width="1080" ResizeMode="NoResize" 
-        Title="MainWindow" Closing="Window_Closing">
+        Title="MainWindow" Closing="Window_Closing" Closed="Window_Closed">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="270"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="270"/>
+            <ColumnDefinition Width="193.629"/>
+            <ColumnDefinition Width="76.371"/>
         </Grid.ColumnDefinitions>
 
         <Grid Grid.Column="1" Background="#FFE4E4E4">
